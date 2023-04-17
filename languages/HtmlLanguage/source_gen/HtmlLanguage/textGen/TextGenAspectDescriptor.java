@@ -24,6 +24,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
   @Override
   public TextGenDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
     switch (myIndex.index(concept)) {
+      case LanguageConceptSwitch.DivTag:
+        return new DivTag_TextGen();
       case LanguageConceptSwitch.HeadTag:
         return new HeadTag_TextGen();
       case LanguageConceptSwitch.HtmlDocument:
@@ -34,6 +36,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new ImageTag_TextGen();
       case LanguageConceptSwitch.ParagraphTag:
         return new ParagraphTag_TextGen();
+      case LanguageConceptSwitch.UListItem:
+        return new UListItem_TextGen();
+      case LanguageConceptSwitch.UnorderedListTag:
+        return new UnorderedListTag_TextGen();
     }
     return null;
   }

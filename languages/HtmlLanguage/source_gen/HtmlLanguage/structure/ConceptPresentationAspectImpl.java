@@ -9,18 +9,29 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
+  private ConceptPresentation props_DivTag;
   private ConceptPresentation props_HeadTag;
   private ConceptPresentation props_HtmlDocument;
   private ConceptPresentation props_HyperlinkTag;
   private ConceptPresentation props_ImageTag;
   private ConceptPresentation props_ParagraphTag;
   private ConceptPresentation props_SimpleTag;
+  private ConceptPresentation props_UListItem;
+  private ConceptPresentation props_UnorderedListTag;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
+      case LanguageConceptSwitch.DivTag:
+        if (props_DivTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("div tag");
+          cpb.rawPresentation("Div");
+          props_DivTag = cpb.create();
+        }
+        return props_DivTag;
       case LanguageConceptSwitch.HeadTag:
         if (props_HeadTag == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -67,6 +78,22 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_SimpleTag = cpb.create();
         }
         return props_SimpleTag;
+      case LanguageConceptSwitch.UListItem:
+        if (props_UListItem == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("list item");
+          cpb.rawPresentation("Item ");
+          props_UListItem = cpb.create();
+        }
+        return props_UListItem;
+      case LanguageConceptSwitch.UnorderedListTag:
+        if (props_UnorderedListTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("unordered list");
+          cpb.rawPresentation("UList");
+          props_UnorderedListTag = cpb.create();
+        }
+        return props_UnorderedListTag;
     }
     return null;
   }

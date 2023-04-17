@@ -29,6 +29,9 @@
       <concept id="7969830514022964687" name="HtmlLanguage.structure.HtmlDocument" flags="ng" index="aWHHJ">
         <child id="7969830514022965938" name="content" index="aWIgi" />
       </concept>
+      <concept id="2949194035394010145" name="HtmlLanguage.structure.DivTag" flags="ng" index="2HGvxS">
+        <child id="2949194035394058036" name="content" index="2HGbdH" />
+      </concept>
     </language>
   </registry>
   <node concept="aWHHJ" id="6UqxE1$q8AY">
@@ -45,7 +48,20 @@
     </node>
     <node concept="aWy9o" id="6UqxE1$rc0P" role="aWIgi">
       <property role="aWy_j" value="mps.png" />
-      <property role="aWzpp" value="MPS logo" />
+      <property role="aWzpp" value="MPS log" />
+    </node>
+    <node concept="2HGvxS" id="2zHD5A5npVO" role="aWIgi">
+      <node concept="aWy9o" id="2zHD5A5nq1f" role="2HGbdH">
+        <property role="aWy_j" value="file" />
+        <property role="aWzpp" value="text" />
+      </node>
+      <node concept="aWxSA" id="2zHD5A5nVVg" role="2HGbdH">
+        <property role="aWx$3" value="text" />
+      </node>
+      <node concept="aW$jm" id="2zHD5A5nW2G" role="2HGbdH">
+        <property role="aW$5V" value="link" />
+        <property role="aW$ZD" value="text" />
+      </node>
     </node>
   </node>
 </model>

@@ -9,21 +9,27 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 public final class LanguageConceptSwitch {
   private final LanguageConceptIndex myIndex;
-  public static final int HeadTag = 0;
-  public static final int HtmlDocument = 1;
-  public static final int HyperlinkTag = 2;
-  public static final int ImageTag = 3;
-  public static final int ParagraphTag = 4;
-  public static final int SimpleTag = 5;
+  public static final int DivTag = 0;
+  public static final int HeadTag = 1;
+  public static final int HtmlDocument = 2;
+  public static final int HyperlinkTag = 3;
+  public static final int ImageTag = 4;
+  public static final int ParagraphTag = 5;
+  public static final int SimpleTag = 6;
+  public static final int UListItem = 7;
+  public static final int UnorderedListTag = 8;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x764a74ce76f54685L, 0xb653bb0758aa91c6L);
+    builder.put(0x28eda459855c5c21L, DivTag);
     builder.put(0x6e9a86a0646889c1L, HeadTag);
     builder.put(0x6e9a86a064685dcfL, HtmlDocument);
     builder.put(0x6e9a86a06468c276L, HyperlinkTag);
     builder.put(0x6e9a86a06468a4f8L, ImageTag);
     builder.put(0x6e9a86a064689886L, ParagraphTag);
     builder.put(0x6e9a86a064686a6cL, SimpleTag);
+    builder.put(0x28eda459855b7d16L, UListItem);
+    builder.put(0x28eda459855b64cbL, UnorderedListTag);
     myIndex = builder.seal();
   }
 

@@ -13,12 +13,15 @@ import jetbrains.mps.smodel.runtime.impl.ConceptDescriptorBuilder2;
 import jetbrains.mps.smodel.adapter.ids.PrimitiveTypeId;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
+  /*package*/ final ConceptDescriptor myConceptDivTag = createDescriptorForDivTag();
   /*package*/ final ConceptDescriptor myConceptHeadTag = createDescriptorForHeadTag();
   /*package*/ final ConceptDescriptor myConceptHtmlDocument = createDescriptorForHtmlDocument();
   /*package*/ final ConceptDescriptor myConceptHyperlinkTag = createDescriptorForHyperlinkTag();
   /*package*/ final ConceptDescriptor myConceptImageTag = createDescriptorForImageTag();
   /*package*/ final ConceptDescriptor myConceptParagraphTag = createDescriptorForParagraphTag();
   /*package*/ final ConceptDescriptor myConceptSimpleTag = createDescriptorForSimpleTag();
+  /*package*/ final ConceptDescriptor myConceptUListItem = createDescriptorForUListItem();
+  /*package*/ final ConceptDescriptor myConceptUnorderedListTag = createDescriptorForUnorderedListTag();
   private final LanguageConceptSwitch myIndexSwitch;
 
   public StructureAspectDescriptor() {
@@ -33,13 +36,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptHeadTag, myConceptHtmlDocument, myConceptHyperlinkTag, myConceptImageTag, myConceptParagraphTag, myConceptSimpleTag);
+    return Arrays.asList(myConceptDivTag, myConceptHeadTag, myConceptHtmlDocument, myConceptHyperlinkTag, myConceptImageTag, myConceptParagraphTag, myConceptSimpleTag, myConceptUListItem, myConceptUnorderedListTag);
   }
 
   @Override
   @Nullable
   public ConceptDescriptor getDescriptor(SConceptId id) {
     switch (myIndexSwitch.index(id)) {
+      case LanguageConceptSwitch.DivTag:
+        return myConceptDivTag;
       case LanguageConceptSwitch.HeadTag:
         return myConceptHeadTag;
       case LanguageConceptSwitch.HtmlDocument:
@@ -52,6 +57,10 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptParagraphTag;
       case LanguageConceptSwitch.SimpleTag:
         return myConceptSimpleTag;
+      case LanguageConceptSwitch.UListItem:
+        return myConceptUListItem;
+      case LanguageConceptSwitch.UnorderedListTag:
+        return myConceptUnorderedListTag;
       default:
         return null;
     }
@@ -62,6 +71,17 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     return myIndexSwitch.index(c);
   }
 
+  private static ConceptDescriptor createDescriptorForDivTag() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("HtmlLanguage", "DivTag", 0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x28eda459855c5c21L);
+    b.class_(false, false, false);
+    // extends: HtmlLanguage.structure.SimpleTag
+    b.super_(0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x6e9a86a064686a6cL);
+    b.origin("r:bd69ae55-c415-49bf-b242-3bef64367402(HtmlLanguage.structure)/2949194035394010145");
+    b.version(3);
+    b.aggregate("content", 0x28eda459855d1734L).target(0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x6e9a86a064686a6cL).optional(true).ordered(true).multiple(true).origin("2949194035394058036").done();
+    b.alias("Div");
+    return b.create();
+  }
   private static ConceptDescriptor createDescriptorForHeadTag() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("HtmlLanguage", "HeadTag", 0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x6e9a86a0646889c1L);
     b.class_(false, false, false);
@@ -123,6 +143,26 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, true, false);
     b.origin("r:bd69ae55-c415-49bf-b242-3bef64367402(HtmlLanguage.structure)/7969830514022967916");
     b.version(3);
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForUListItem() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("HtmlLanguage", "UListItem", 0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x28eda459855b7d16L);
+    b.class_(false, false, false);
+    b.origin("r:bd69ae55-c415-49bf-b242-3bef64367402(HtmlLanguage.structure)/2949194035393953046");
+    b.version(3);
+    b.property("text", 0x28eda459855babb9L).type(PrimitiveTypeId.STRING).origin("2949194035393964985").done();
+    b.alias("Item ");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForUnorderedListTag() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("HtmlLanguage", "UnorderedListTag", 0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x28eda459855b64cbL);
+    b.class_(false, false, false);
+    // extends: HtmlLanguage.structure.SimpleTag
+    b.super_(0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x6e9a86a064686a6cL);
+    b.origin("r:bd69ae55-c415-49bf-b242-3bef64367402(HtmlLanguage.structure)/2949194035393946827");
+    b.version(3);
+    b.aggregate("tags", 0x28eda459855b7b8eL).target(0x764a74ce76f54685L, 0xb653bb0758aa91c6L, 0x28eda459855b7d16L).optional(true).ordered(true).multiple(true).origin("2949194035393952654").done();
+    b.alias("UList");
     return b.create();
   }
 }
